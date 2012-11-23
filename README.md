@@ -1,33 +1,43 @@
-# Adopt-a-Hydrant [![Build Status](https://secure.travis-ci.org/codeforamerica/adopt-a-hydrant.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/codeforamerica/adopt-a-hydrant.png?travis)][gemnasium]
-Claim responsibility for shoveling out a fire hydrant after it snows.
-
-[travis]: http://travis-ci.org/codeforamerica/adopt-a-hydrant
-[gemnasium]: https://gemnasium.com/codeforamerica/adopt-a-hydrant
-
 ## Screenshot
 ![Adopt-a-Hydrant](https://github.com/codeforamerica/adopt-a-hydrant/raw/master/screenshot.png "Adopt-a-Hydrant")
 
 ## Demo
 You can see a running version of the application at
-[http://adopt-a-hydrant.herokuapp.com/][demo].
+[http://hydrant-mjelen.rhcloud.com/][demo].
 
-[demo]: http://adopt-a-hydrant.herokuapp.com/
+[demo]: http://hydrant-mjelen.rhcloud.com/
 
 ## Installation
-This application requires [Postgres](http://www.postgresql.org/) to be installed
 
-    git clone git://github.com/codeforamerica/adopt-a-hydrant.git
-    cd adopt-a-hydrant
-    bundle install
+Create OpenShift application
 
-    bundle exec rake db:create
-    bundle exec rake db:schema:load
+	rhc app create -a hydrant -t ruby-1.9
 
-## Usage
-    rails server
+and note the SSH url. Then add PostgreSQL support
 
-## Seed Data
-    bundle exec rake db:seed
+	rhc cartridge -c postgresql-8.4 -a hydrant
+
+Enter the application
+
+	cd hydrant
+
+Pull this repository
+
+	git pull -s recursive -X theirs git://github.com/marekjelen/openshift-adopt-a-hydrant.git
+
+SSH to the SSH url
+
+	ssh <your url>
+
+and enter the directory with application
+
+	cd app-root/repo
+
+and seed the hydrants
+
+	bundle exec rake db:seed
+
+ad that is all ;)
 
 ## Contributing
 In the spirit of [free software][free-sw], **everyone** is encouraged to help
