@@ -33,6 +33,10 @@ Copy&paste the hash into
 
     .openshift/action_hooks/pre_start_ruby-1.9
 
+Add and commit
+
+  git add . && git commit -m "Deploying Adopt-a-Hydrant"
+
 Push it back up to your gear
 
 	git push
