@@ -11,19 +11,23 @@ You can see a running version of the application at
 
 Create OpenShift application
 
-	rhc app create -a hydrant -t ruby-1.9
+	rhc app create hydrant ruby-1.9
 
 and note the SSH url. Then add PostgreSQL support
 
-	rhc cartridge -c postgresql-8.4 -a hydrant
+	rhc cartridge add postgresql-8.4 --app hydrant
 
-Enter the application
+Enter the application directory on your local machine
 
 	cd hydrant
 
-Pull this repository
+Pull this github repository
 
 	git pull -s recursive -X theirs git://github.com/marekjelen/openshift-adopt-a-hydrant.git
+	
+Push it back up to your gear
+	
+	git push
 
 SSH to the SSH url
 
