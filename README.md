@@ -24,9 +24,17 @@ Enter the application directory on your local machine
 Pull this github repository
 
 	git pull -s recursive -X theirs git://github.com/marekjelen/openshift-adopt-a-hydrant.git
-	
+
+Generate new session secret
+
+    rake secret
+
+Copy&paste the hash into
+
+    .openshift/action_hooks/pre_start_ruby-1.9
+
 Push it back up to your gear
-	
+
 	git push
 
 SSH to the SSH url
@@ -42,39 +50,6 @@ and seed the hydrants
 	bundle exec rake db:seed
 
 ad that is all ;)
-
-## Deploying to Heroku
-A successful deployment to Heroku requires a few setup steps:
-
-1. Generate a new secret token:
-
-    ```
-    rake secret
-    ```
-
-2. Set the token on Heroku:
-
-    ```
-    heroku config:set SECRET_TOKEN=the_token_you_generated
-    ```
-
-3. [Precompile your assets](https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar)
-
-    ```
-    RAILS_ENV=production bundle exec rake assets:precompile
-
-    git add public/assets
-
-    git commit -m "vendor compiled assets"
-    ```
-
-4. Add a production database to config/database.yml
-
-5. Seed the production db:
-
-    `heroku run bundle exec rake db:seed`
-
-6. Keep in mind that the Heroku free Postgres plan only allows up to 10,000 rows, so if your city has more than 10,000 fire hydrants (or other thing to be adopted), you will need to upgrade to the $9/month plan. 
 
 ## Contributing
 In the spirit of [free software][free-sw], **everyone** is encouraged to help
